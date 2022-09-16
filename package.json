@@ -1,0 +1,11 @@
+{
+  "name": "js_advanced_course",
+  "version": "1.0.0",
+  "description": "javascript",
+  "main": "makeLesson.js",
+  "scripts": {
+    "new": "node makeLesson.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
