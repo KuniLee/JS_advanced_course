@@ -154,3 +154,45 @@ document.addEventListener('click', ({target}) => {
     }
 )
 
+const form = document.querySelector('.form')
+const inputs = form.querySelectorAll("input,textarea")
+const name = form.querySelector('#name')
+const phone = form.querySelector('#phone')
+const email = form.querySelector('#email')
+const text = form.querySelector('#text')
+let notValidated=new Set( Array.from(inputs).map(input=>input.labels[0].outerText))
+
+function validation(e, regexp) {
+    if ( regexp.test(e.target.value)){
+        e.target.classList.remove('is-invalid')
+        e.target.classList.add('is-valid')
+        notValidated.delete(e.target.labels[0].outerText)
+    } else {
+        e.target.classList.remove('is-valid')
+        e.target.classList.add('is-invalid')
+        notValidated.add(e.target.labels[0].outerText)
+    }
+}
+
+name.addEventListener('input',(e)=>{
+    validation(e, /^[a-zа-я_-]+$/i)
+})
+phone.addEventListener('input',(e)=>{
+    validation(e, /^\+7\(\d{3}\)\d{3}-\d{4}$/)
+})
+email.addEventListener('input',(e)=>{
+    validation(e, /^[^ ]+@[^ ]+\.[a-z]{2,3}$/)
+})
+text.addEventListener('input',(e)=>{
+    validation(e, /.+/)
+})
+
+
+form.addEventListener('submit',(event)=>{
+    event.preventDefault()
+        console.log()
+        if(notValidated.size!==0)
+        alert("Неверно заполнены поля: " + Array.from(notValidated).join(", "))
+    else alert("Данные отправленны")
+}
+)
