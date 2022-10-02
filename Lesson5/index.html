@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="utf-8">
+	<title>eShop</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+			integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+	<style>
+        [v-cloak] {
+            display: none;
+        }
+	</style>
+</head>
+<body>
+<div v-cloak id="app">
+	<header>
+		<nav class="navbar navbar-dark bg-dark">
+			<div class="container justify-content-between">
+				<span class="navbar-brand mb-0 h1">Магазин</span>
+				<div>
+					<span class="navbar-text cart me-2">{{renderCart}}</span>
+					<input v-model="searchLine" type="text" class="goods-search"/>
+					<button @click="filterGoods" class="ms-2 btn btn-secondary search-button" type="button">Искать</button>
+				</div>
+			</div>
+		</nav>
+	</header>
+	<main class="container py-2">
+		<div class="goods-list row g-2 mb-2">
+			<div v-if="!filteredGoods.length" class="alert alert-secondary" role="alert">Нет данных</div>
+			<div v-for="good in filteredGoods" class="col-4">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">{{good.product_name}}</h5>
+						<p class="card-text">{{good.price}} {{isNaN(good.price) ? "" : " руб"}}</p>
+						<button @click="addToBasket(good)" class="btn btn-primary">В корзину</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<button @click="isVisibleCart=!isVisibleCart" :class="['btn',isVisibleCart ? 'btn-secondary' : 'btn-primary']">
+			{{isVisibleCart ? "Закрыть":"Открыть"}} Корзину</button>
+		<ul v-if="isVisibleCart" class="list-group list-group-numbered my-2">
+			<li v-if="!basket.length" class="alert alert-secondary">Корзина пуста</li>
+			<li v-for="good in basket"
+					class="list-group-item position-relative">
+				{{good.productObj.product_name}}. {{good.amount}} шт. Сумма: {{good.amount * good.productObj.price}}руб.
+				<button @click="removeFromBasket(good.productObj)"
+						class="btn btn-danger position-absolute top-0 end-0">Удалить
+				</button>
+			</li>
+		</ul>
+
+	</main>
+</div>
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
