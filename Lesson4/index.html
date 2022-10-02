@@ -14,7 +14,7 @@
 			<div>
 				<span class="navbar-text cart"></span>
 				<input type="text" class="goods-search" />
-				<button class="search-button" type="button">Искать</button>
+				<button class="btn search-button" type="button">Искать</button>
 <!--				<button class="btn btn-secondary cart-button" type="button">Корзина</button>-->
 			</div>
 		</div>
@@ -23,6 +23,26 @@
 <main class="container py-2">
 	<div class="goods-list row g-2"></div>
 	<ul class="list-group list-group-numbered"></ul>
+	<form action="submit" class="form">
+		<div class="my-1">
+			<label for="name" class="form-label">Имя</label>
+			<input type="text" class="form-control is-invalid" id="name" placeholder="Введите имя">
+		</div>
+		<div class="mb-1">
+			<label for="phone" class="form-label">Телефон</label>
+			<input type="tel" class="form-control is-invalid" id="phone" placeholder="Введите телефон">
+		</div>
+		<div class="mb-1">
+			<label for="email" class="form-label">e-mail</label>
+			<input type="text" class="form-control is-invalid" id="email" placeholder="Введите email">
+		</div>
+		<div class="mb-1">
+			<label for="text" class="form-label">Текст</label>
+			<textarea class="form-control is-invalid" id="text" rows="3"></textarea>
+		</div>
+		<button class="btn btn-primary" type="submit">Отправить</button>
+	</form>
+
 </main>
 <script src="app.js"></script>
 </body>
